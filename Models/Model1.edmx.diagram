@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b0211883e6ff40bf993b4f02bca5285a" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="projectsqlModel.aRecipe" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.cMember" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.CollectionRecipe" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.DraftClass" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.DraftIngredient" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.DraftRecipes" Width="1.5" PointX="6" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.DraftSteps" Width="1.5" PointX="8.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.GoodRecipe" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.Ingredient" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.MessageRecipe" Width="1.5" PointX="8.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.RClass" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.Steps" Width="1.5" PointX="5.25" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.Blacklist" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.Planning" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.PlanningIngredient" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.ReportMessage" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectsqlModel.ReportRecipe" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="projectsqlModel.FK_aRecipe_cMember" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_aRecipe_RClass" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_CollectionRecipe_aRecipe" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_GoodRecipe_aRecipe" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_Ingredient_aRecipe" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_MessageRecipe_aRecipe" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_Steps_aRecipe" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_CollectionRecipe_cMember" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_DraftRecipes_cMember" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_GoodRecipe_cMember" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_MessageRecipe_cMember" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_DraftRecipes_DraftClass" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_DraftIngredient_DraftRecipes" ManuallyRouted="false" />
+        <AssociationConnector Association="projectsqlModel.FK_DraftSteps_DraftRecipes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

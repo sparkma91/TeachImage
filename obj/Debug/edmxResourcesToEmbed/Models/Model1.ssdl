@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projectsqlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="aRecipe">
+    <Key>
+      <PropertyRef Name="aId" />
+    </Key>
+    <Property Name="aId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aName" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="classId" Type="int" Nullable="false" />
+    <Property Name="aIntroduce" Type="nvarchar" MaxLength="500" />
+    <Property Name="aImg" Type="image" />
+    <Property Name="aQuantity" Type="int" Nullable="false" />
+    <Property Name="aTime" Type="int" Nullable="false" />
+    <Property Name="cId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'projectsql.dbo.Blacklist' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="Blacklist">
+    <Key>
+      <PropertyRef Name="bId" />
+      <PropertyRef Name="cId" />
+    </Key>
+    <Property Name="bId" Type="int" Nullable="false" />
+    <Property Name="cId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="cMember">
+    <Key>
+      <PropertyRef Name="cId" />
+    </Key>
+    <Property Name="cId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cUserId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cPwd" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="cPPwd" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="cNickname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cSex" Type="char" MaxLength="1" />
+    <Property Name="cPhoneNum" Type="varchar" MaxLength="20" />
+    <Property Name="cEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cBirth" Type="date" />
+  </EntityType>
+  <EntityType Name="CollectionRecipe">
+    <Key>
+      <PropertyRef Name="colId" />
+    </Key>
+    <Property Name="colId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aId" Type="int" Nullable="false" />
+    <Property Name="cId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DraftClass">
+    <Key>
+      <PropertyRef Name="abclassId" />
+    </Key>
+    <Property Name="abclassId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="abclassName" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="abclassNameD" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DraftIngredient">
+    <Key>
+      <PropertyRef Name="abiId" />
+    </Key>
+    <Property Name="abiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="abiName" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="abiNum" Type="int" />
+    <Property Name="abiUnit" Type="nchar" MaxLength="10" />
+    <Property Name="abId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DraftRecipes">
+    <Key>
+      <PropertyRef Name="abId" />
+    </Key>
+    <Property Name="abId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="abName" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="abclassId" Type="int" />
+    <Property Name="abIntroduce" Type="nvarchar" MaxLength="50" />
+    <Property Name="abImg" Type="image" />
+    <Property Name="abQuantity" Type="int" />
+    <Property Name="abTime" Type="int" />
+    <Property Name="cId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DraftSteps">
+    <Key>
+      <PropertyRef Name="absId" />
+    </Key>
+    <Property Name="absId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="absContent" Type="nvarchar" MaxLength="50" />
+    <Property Name="abId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodRecipe">
+    <Key>
+      <PropertyRef Name="gId" />
+    </Key>
+    <Property Name="gId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aId" Type="int" Nullable="false" />
+    <Property Name="cId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ingredient">
+    <Key>
+      <PropertyRef Name="iId" />
+    </Key>
+    <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iName" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="iNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="iUnit" Type="nchar" MaxLength="10" />
+    <Property Name="aId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6013: 資料表/檢視 'projectsql.dbo.Member_relation' 未定義主索引鍵，也無法推斷有效的主索引鍵。此資料表/檢視已被排除。如果要使用此實體，您必須檢閱您的結構描述，加入正確的索引鍵，並將它取消註解。
+        <EntityType Name="Member_relation">
+          <Property Name="follower_id" Type="nchar" MaxLength="10" />
+          <Property Name="followee_id" Type="nchar" MaxLength="10" />
+        </EntityType>-->
+  <EntityType Name="MessageRecipe">
+    <Key>
+      <PropertyRef Name="mId" />
+    </Key>
+    <Property Name="mId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mCon" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="aId" Type="int" Nullable="false" />
+    <Property Name="cId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'projectsql.dbo.Planning' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="Planning">
+    <Key>
+      <PropertyRef Name="pId" />
+      <PropertyRef Name="aName" />
+      <PropertyRef Name="pQuantity" />
+      <PropertyRef Name="pTimeA" />
+      <PropertyRef Name="pTimeB" />
+      <PropertyRef Name="cId" />
+      <PropertyRef Name="aId" />
+    </Key>
+    <Property Name="pId" Type="int" Nullable="false" />
+    <Property Name="aName" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="pQuantity" Type="int" Nullable="false" />
+    <Property Name="pTimeA" Type="date" Nullable="false" />
+    <Property Name="pTimeB" Type="date" Nullable="false" />
+    <Property Name="cId" Type="int" Nullable="false" />
+    <Property Name="aId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'projectsql.dbo.PlanningIngredient' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="PlanningIngredient">
+    <Key>
+      <PropertyRef Name="piId" />
+      <PropertyRef Name="piName" />
+      <PropertyRef Name="piNum" />
+      <PropertyRef Name="piUnit" />
+      <PropertyRef Name="pId" />
+    </Key>
+    <Property Name="piId" Type="int" Nullable="false" />
+    <Property Name="piName" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="piNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="piUnit" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="pId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RClass">
+    <Key>
+      <PropertyRef Name="classId" />
+    </Key>
+    <Property Name="classId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="className" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="classNameD" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'projectsql.dbo.ReportMessage' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="ReportMessage">
+    <Key>
+      <PropertyRef Name="rmId" />
+      <PropertyRef Name="rmName" />
+      <PropertyRef Name="cIdA" />
+      <PropertyRef Name="cIdB" />
+      <PropertyRef Name="mId" />
+    </Key>
+    <Property Name="rmId" Type="int" Nullable="false" />
+    <Property Name="rmName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cIdA" Type="int" Nullable="false" />
+    <Property Name="cIdB" Type="int" Nullable="false" />
+    <Property Name="mId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'projectsql.dbo.ReportRecipe' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="ReportRecipe">
+    <Key>
+      <PropertyRef Name="rrId" />
+      <PropertyRef Name="rrName" />
+      <PropertyRef Name="cIdA" />
+      <PropertyRef Name="cIdB" />
+      <PropertyRef Name="aId" />
+    </Key>
+    <Property Name="rrId" Type="int" Nullable="false" />
+    <Property Name="rrName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cIdA" Type="int" Nullable="false" />
+    <Property Name="cIdB" Type="int" Nullable="false" />
+    <Property Name="aId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Steps">
+    <Key>
+      <PropertyRef Name="sId" />
+    </Key>
+    <Property Name="sId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sContent" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="aId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_aRecipe_cMember">
+    <End Role="cMember" Type="Self.cMember" Multiplicity="1" />
+    <End Role="aRecipe" Type="Self.aRecipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cMember">
+        <PropertyRef Name="cId" />
+      </Principal>
+      <Dependent Role="aRecipe">
+        <PropertyRef Name="cId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_aRecipe_RClass">
+    <End Role="RClass" Type="Self.RClass" Multiplicity="1" />
+    <End Role="aRecipe" Type="Self.aRecipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RClass">
+        <PropertyRef Name="classId" />
+      </Principal>
+      <Dependent Role="aRecipe">
+        <PropertyRef Name="classId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectionRecipe_aRecipe">
+    <End Role="aRecipe" Type="Self.aRecipe" Multiplicity="1" />
+    <End Role="CollectionRecipe" Type="Self.CollectionRecipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aRecipe">
+        <PropertyRef Name="aId" />
+      </Principal>
+      <Dependent Role="CollectionRecipe">
+        <PropertyRef Name="aId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectionRecipe_cMember">
+    <End Role="cMember" Type="Self.cMember" Multiplicity="1" />
+    <End Role="CollectionRecipe" Type="Self.CollectionRecipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cMember">
+        <PropertyRef Name="cId" />
+      </Principal>
+      <Dependent Role="CollectionRecipe">
+        <PropertyRef Name="aId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DraftIngredient_DraftRecipes">
+    <End Role="DraftRecipes" Type="Self.DraftRecipes" Multiplicity="1" />
+    <End Role="DraftIngredient" Type="Self.DraftIngredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DraftRecipes">
+        <PropertyRef Name="abId" />
+      </Principal>
+      <Dependent Role="DraftIngredient">
+        <PropertyRef Name="abId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DraftRecipes_cMember">
+    <End Role="cMember" Type="Self.cMember" Multiplicity="1" />
+    <End Role="DraftRecipes" Type="Self.DraftRecipes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cMember">
+        <PropertyRef Name="cId" />
+      </Principal>
+      <Dependent Role="DraftRecipes">
+        <PropertyRef Name="cId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DraftRecipes_DraftClass">
+    <End Role="DraftClass" Type="Self.DraftClass" Multiplicity="0..1" />
+    <End Role="DraftRecipes" Type="Self.DraftRecipes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DraftClass">
+        <PropertyRef Name="abclassId" />
+      </Principal>
+      <Dependent Role="DraftRecipes">
+        <PropertyRef Name="abclassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DraftSteps_DraftRecipes">
+    <End Role="DraftRecipes" Type="Self.DraftRecipes" Multiplicity="1" />
+    <End Role="DraftSteps" Type="Self.DraftSteps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DraftRecipes">
+        <PropertyRef Name="abId" />
+      </Principal>
+      <Dependent Role="DraftSteps">
+        <PropertyRef Name="abId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GoodRecipe_aRecipe">
+    <End Role="aRecipe" Type="Self.aRecipe" Multiplicity="1" />
+    <End Role="GoodRecipe" Type="Self.GoodRecipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aRecipe">
+        <PropertyRef Name="aId" />
+      </Principal>
+      <Dependent Role="GoodRecipe">
+        <PropertyRef Name="aId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GoodRecipe_cMember">
+    <End Role="cMember" Type="Self.cMember" Multiplicity="1" />
+    <End Role="GoodRecipe" Type="Self.GoodRecipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cMember">
+        <PropertyRef Name="cId" />
+      </Principal>
+      <Dependent Role="GoodRecipe">
+        <PropertyRef Name="aId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ingredient_aRecipe">
+    <End Role="aRecipe" Type="Self.aRecipe" Multiplicity="1" />
+    <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aRecipe">
+        <PropertyRef Name="aId" />
+      </Principal>
+      <Dependent Role="Ingredient">
+        <PropertyRef Name="aId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageRecipe_aRecipe">
+    <End Role="aRecipe" Type="Self.aRecipe" Multiplicity="1" />
+    <End Role="MessageRecipe" Type="Self.MessageRecipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aRecipe">
+        <PropertyRef Name="aId" />
+      </Principal>
+      <Dependent Role="MessageRecipe">
+        <PropertyRef Name="aId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageRecipe_cMember">
+    <End Role="cMember" Type="Self.cMember" Multiplicity="1" />
+    <End Role="MessageRecipe" Type="Self.MessageRecipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cMember">
+        <PropertyRef Name="cId" />
+      </Principal>
+      <Dependent Role="MessageRecipe">
+        <PropertyRef Name="aId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Steps_aRecipe">
+    <End Role="aRecipe" Type="Self.aRecipe" Multiplicity="1" />
+    <End Role="Steps" Type="Self.Steps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aRecipe">
+        <PropertyRef Name="aId" />
+      </Principal>
+      <Dependent Role="Steps">
+        <PropertyRef Name="aId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="projectsqlModelStoreContainer">
+    <EntitySet Name="aRecipe" EntityType="Self.aRecipe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cMember" EntityType="Self.cMember" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CollectionRecipe" EntityType="Self.CollectionRecipe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DraftClass" EntityType="Self.DraftClass" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DraftIngredient" EntityType="Self.DraftIngredient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DraftRecipes" EntityType="Self.DraftRecipes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DraftSteps" EntityType="Self.DraftSteps" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GoodRecipe" EntityType="Self.GoodRecipe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MessageRecipe" EntityType="Self.MessageRecipe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RClass" EntityType="Self.RClass" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Steps" EntityType="Self.Steps" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Blacklist" EntityType="Self.Blacklist" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Blacklist].[bId] AS [bId], 
+    [Blacklist].[cId] AS [cId]
+    FROM [dbo].[Blacklist] AS [Blacklist]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Planning" EntityType="Self.Planning" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Planning].[pId] AS [pId], 
+    [Planning].[aName] AS [aName], 
+    [Planning].[pQuantity] AS [pQuantity], 
+    [Planning].[pTimeA] AS [pTimeA], 
+    [Planning].[pTimeB] AS [pTimeB], 
+    [Planning].[cId] AS [cId], 
+    [Planning].[aId] AS [aId]
+    FROM [dbo].[Planning] AS [Planning]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PlanningIngredient" EntityType="Self.PlanningIngredient" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PlanningIngredient].[piId] AS [piId], 
+    [PlanningIngredient].[piName] AS [piName], 
+    [PlanningIngredient].[piNum] AS [piNum], 
+    [PlanningIngredient].[piUnit] AS [piUnit], 
+    [PlanningIngredient].[pId] AS [pId]
+    FROM [dbo].[PlanningIngredient] AS [PlanningIngredient]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ReportMessage" EntityType="Self.ReportMessage" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ReportMessage].[rmId] AS [rmId], 
+    [ReportMessage].[rmName] AS [rmName], 
+    [ReportMessage].[cIdA] AS [cIdA], 
+    [ReportMessage].[cIdB] AS [cIdB], 
+    [ReportMessage].[mId] AS [mId]
+    FROM [dbo].[ReportMessage] AS [ReportMessage]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ReportRecipe" EntityType="Self.ReportRecipe" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ReportRecipe].[rrId] AS [rrId], 
+    [ReportRecipe].[rrName] AS [rrName], 
+    [ReportRecipe].[cIdA] AS [cIdA], 
+    [ReportRecipe].[cIdB] AS [cIdB], 
+    [ReportRecipe].[aId] AS [aId]
+    FROM [dbo].[ReportRecipe] AS [ReportRecipe]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_aRecipe_cMember" Association="Self.FK_aRecipe_cMember">
+      <End Role="cMember" EntitySet="cMember" />
+      <End Role="aRecipe" EntitySet="aRecipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_aRecipe_RClass" Association="Self.FK_aRecipe_RClass">
+      <End Role="RClass" EntitySet="RClass" />
+      <End Role="aRecipe" EntitySet="aRecipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectionRecipe_aRecipe" Association="Self.FK_CollectionRecipe_aRecipe">
+      <End Role="aRecipe" EntitySet="aRecipe" />
+      <End Role="CollectionRecipe" EntitySet="CollectionRecipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectionRecipe_cMember" Association="Self.FK_CollectionRecipe_cMember">
+      <End Role="cMember" EntitySet="cMember" />
+      <End Role="CollectionRecipe" EntitySet="CollectionRecipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DraftIngredient_DraftRecipes" Association="Self.FK_DraftIngredient_DraftRecipes">
+      <End Role="DraftRecipes" EntitySet="DraftRecipes" />
+      <End Role="DraftIngredient" EntitySet="DraftIngredient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DraftRecipes_cMember" Association="Self.FK_DraftRecipes_cMember">
+      <End Role="cMember" EntitySet="cMember" />
+      <End Role="DraftRecipes" EntitySet="DraftRecipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DraftRecipes_DraftClass" Association="Self.FK_DraftRecipes_DraftClass">
+      <End Role="DraftClass" EntitySet="DraftClass" />
+      <End Role="DraftRecipes" EntitySet="DraftRecipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DraftSteps_DraftRecipes" Association="Self.FK_DraftSteps_DraftRecipes">
+      <End Role="DraftRecipes" EntitySet="DraftRecipes" />
+      <End Role="DraftSteps" EntitySet="DraftSteps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GoodRecipe_aRecipe" Association="Self.FK_GoodRecipe_aRecipe">
+      <End Role="aRecipe" EntitySet="aRecipe" />
+      <End Role="GoodRecipe" EntitySet="GoodRecipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GoodRecipe_cMember" Association="Self.FK_GoodRecipe_cMember">
+      <End Role="cMember" EntitySet="cMember" />
+      <End Role="GoodRecipe" EntitySet="GoodRecipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ingredient_aRecipe" Association="Self.FK_Ingredient_aRecipe">
+      <End Role="aRecipe" EntitySet="aRecipe" />
+      <End Role="Ingredient" EntitySet="Ingredient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageRecipe_aRecipe" Association="Self.FK_MessageRecipe_aRecipe">
+      <End Role="aRecipe" EntitySet="aRecipe" />
+      <End Role="MessageRecipe" EntitySet="MessageRecipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageRecipe_cMember" Association="Self.FK_MessageRecipe_cMember">
+      <End Role="cMember" EntitySet="cMember" />
+      <End Role="MessageRecipe" EntitySet="MessageRecipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Steps_aRecipe" Association="Self.FK_Steps_aRecipe">
+      <End Role="aRecipe" EntitySet="aRecipe" />
+      <End Role="Steps" EntitySet="Steps" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
